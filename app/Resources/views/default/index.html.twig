@@ -1,17 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}INDEX{% endblock %}
+{% block title %}Strona domowa z projektami{% endblock %}
 
 {% block body %}
     <br>
-    <h2>Pesel generator</h2><br>
-    <form method="POST" action="/getpesel">
-        Login: <br>
-        <input type="date" name="date_born">
-        <br>
-        Numer z kliniki: <br>
-        <input type="number" name="number">
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+    <h2>Strona domowa z projektami</h2><br>
+    <a href="/getpesel">Generator pesel</a>
 {% endblock %}

@@ -1,14 +1,24 @@
 {% block body %}
     <br>
     <h2>Pesel generator</h2><br>
+    <div>Pesel jest generowany na podstawie daty urodzenia oraz czterech ostatnich cyfr tegoż numeru.<br>
+        Algorytm został stworzony na potrzeby pokazania jak uzyskać numer pesel idąc do jednej z Krakowskich Klinik.
+    </div>
+    <br>
     <form method="POST" action="/getpesel">
-        Login: <br>
-        <input type="date" name="date_born">
+        Data urodzenia: <input type="date" name="date_born">
         <br>
-        Numer z kliniki: <br>
-        <input type="number" name="number">
+            {% for error in dateErrors %}
+                <div style="color: red">{{ error }}</div>
+            {% endfor %}
+
+        {#{{ dateErrors }}<br>#}
+        Numer z kliniki: <input type="number" name="number">
         <br>
-        <input type="submit" value="Submit">
+        {% for error in numberErrors %}
+                <div style="color: red">{{ error }}</div>
+            {% endfor %}
+        <input type="submit" value="Generuj">
     </form>
 {% endblock %}
 
