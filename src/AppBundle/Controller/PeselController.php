@@ -15,7 +15,7 @@ class PeselController extends Controller
 	/**
 	 * @Route("/getpesel")
 	 */
-	public function getPeselAction( Request $request )
+	public function getPeselAction(Request $request)
 	{
 		$dateErrors = [];
 		$fourNumberErrors = [];
@@ -54,7 +54,7 @@ class PeselController extends Controller
 		] );
 	}
 
-	private function getPattern($date, $number)
+	private function getPattern($date, $number): int
 	{
 		$date = strtotime($date);
 
@@ -66,7 +66,7 @@ class PeselController extends Controller
 			3*$day[1] + 9*$number[0]+ $number[1] + 3*$number[2] + $number[3]);
 	}
 
-	private function checkPeselNumber( $pattern )
+	private function checkPeselNumber( $pattern ): int
 	{
 		for ( $g = 0; $g <= 9; $g++ )
 		{
@@ -78,7 +78,7 @@ class PeselController extends Controller
 		return false;
 	}
 
-	private function getPeselNumber($date, $missingNumber, $number)
+	private function getPeselNumber($date, $missingNumber, $number): string
 	{
 		if ( !empty($number) )
 		{

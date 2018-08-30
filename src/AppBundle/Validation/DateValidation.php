@@ -17,13 +17,13 @@ class DateValidation implements ValidationInterface
 		$this->errors = [];
 	}
 
-	public function isValid($date)
+	public function isValid($date): bool
 	{
 		$this->errors = $this->dateValidator->validate($date);
 		return (count($this->errors) > 0 ) ? false : true;
 	}
 
-	public function getErrors()
+	public function getErrors(): array
 	{
 		return $this->errors;
 	}

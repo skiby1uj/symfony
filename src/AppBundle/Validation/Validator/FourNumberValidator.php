@@ -5,7 +5,7 @@ namespace AppBundle\Validation\Validator;
 class FourNumberValidator implements ValidatorInterface
 {
 
-	public function validate($number)
+	public function validate($number):array
 	{
 		$errors = [];
 

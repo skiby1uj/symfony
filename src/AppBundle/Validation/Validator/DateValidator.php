@@ -4,7 +4,7 @@ namespace AppBundle\Validation\Validator;
 
 class DateValidator implements ValidatorInterface
 {
-	public function validate($date)
+	public function validate($date) :array
 	{
 		$errors = [];
 
