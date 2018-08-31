@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Model\PeselModel;
 use AppBundle\Validation\DateValidation;
 use AppBundle\Validation\FourNumberValidation;
 use AppBundle\Validation\Validator\DateValidator;
@@ -40,11 +41,8 @@ class PeselController extends Controller
 
 		if ( $isValidationDate && $isValidationFourNumber )
 		{
-			$pattern = $this->getPattern($date, $number);
-
-			$missingNumber = $this->checkPeselNumber($pattern);
-
-			$peselNumber = $this->getPeselNumber($date, $missingNumber, $number);
+			$peselModel = new PeselModel($date, $number);
+			$peselNumber = $peselModel->getPeselNumber();
 		}
 
 		return $this->render( "pesel/index.html.twig",[
@@ -52,46 +50,5 @@ class PeselController extends Controller
 			'dateErrors' => $dateErrors,
 			'numberErrors' => $fourNumberErrors
 		] );
-	}
-
-	private function getPattern($date, $number): int
-	{
-		$date = strtotime($date);
-
-		$year =  date("y", $date);
-		$month = date("m", $date);
-		$day =   date("d", $date);
-
-		return ($year[0] + 3*$year[1] + 7*$month[0] + 9*$month[1] + $day[0] +
-			3*$day[1] + 9*$number[0]+ $number[1] + 3*$number[2] + $number[3]);
-	}
-
-	private function checkPeselNumber( $pattern ): int
-	{
-		for ( $g = 0; $g <= 9; $g++ )
-		{
-			$score = $pattern + 7 * $g;
-
-			if ( $score % 10 == 0 )
-				return $g;
-		}
-		return false;
-	}
-
-	private function getPeselNumber($date, $missingNumber, $number): string
-	{
-		if ( !empty($number) )
-		{
-			$date = strtotime($date);
-
-			$year =  date("y", $date);
-			$month = date("m", $date);
-			$day =   date("d", $date);
-
-			if ( $missingNumber !== false )
-				return $year.$month.$day.$missingNumber.$number;
-		}
-
-		return '';
 	}
 }
