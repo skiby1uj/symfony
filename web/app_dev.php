@@ -3,7 +3,7 @@
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
-define("PROD", false);
+define("PROD", true);
 define("PROD_DOMAIN", "symfonyodpostaw.pl");
 define("LOCAL_DOMAIN", "localhost");
 
