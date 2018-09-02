@@ -12,7 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-    	include_once "../../../config.php";
+    	require_once __DIR__."/../../../config.php";
 
         return $this->render('default/index.html.twig', [
 			'domain' => (PROD) ? PROD_DOMAIN: LOCAL_DOMAIN,
